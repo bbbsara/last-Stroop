@@ -1,124 +1,123 @@
-/* استيراد خط عربي جميل من جوجل */
 @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;900&display=swap');
 
 body {
     font-family: "Tajawal", sans-serif;
-    background-color: #f4f4f4; /* خلفية رمادية فاتحة */
-    color: #333;
+    background-color: #333; /* لون افتراضي قبل البدء */
     margin: 0;
     padding: 0;
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 100vh; /* توسيط المحتوى عمودياً */
+    min-height: 100vh;
     text-align: center;
     direction: rtl;
+    transition: background-color 0.2s ease; /* انتقال ناعم وسريع للون الخلفية */
 }
 
-/* صندوق المحتوى الرئيسي */
-#start-screen, #test-container, #end-screen {
+/* الحاويات الرئيسية */
+#start-screen, #end-screen {
     background: white;
     padding: 40px;
-    border-radius: 15px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1); /* ظل خفيف */
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
     width: 90%;
-    max-width: 600px;
-    margin: auto;
+    max-width: 500px;
 }
 
-/* تنسيق العناوين */
-h1, h2 {
-    color: #2c3e50;
-    margin-bottom: 20px;
+/* حاوية الاختبار */
+#test-container {
+    width: 100%;
+    max-width: 800px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
-/* حقل الإدخال */
-input[type="text"] {
-    padding: 12px;
-    width: 70%;
-    font-size: 18px;
-    border: 2px solid #ddd;
-    border-radius: 8px;
-    font-family: "Tajawal", sans-serif;
-    outline: none;
-    transition: 0.3s;
+/* المربع الأبيض في الوسط */
+#word-box {
+    background-color: white;
+    padding: 30px 60px;
+    border-radius: 15px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+    margin: 30px 0;
+    min-width: 200px;
+    display: inline-block;
 }
 
-input[type="text"]:focus {
-    border-color: #007aff;
-}
-
-/* زر البدء */
-#start-btn {
-    padding: 12px 30px;
-    font-size: 20px;
-    background-color: #007aff;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    margin-top: 15px;
-    font-family: "Tajawal", sans-serif;
-    transition: background 0.3s;
-}
-
-#start-btn:hover {
-    background-color: #005bb5;
-}
-
-/* الكلمة الملونة (أهم جزء) */
+/* الكلمة داخل المربع */
 #word {
-    font-size: 80px;
+    font-size: 60px;
     font-weight: 900;
-    margin: 40px 0;
-    min-height: 100px; /* لحفظ المكان */
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+    color: #000; /* أسود دائماً ليكون واضحاً */
+    margin: 0;
+}
+
+/* عداد الأسئلة */
+#counter {
+    font-size: 28px;
+    color: white;
+    font-weight: bold;
+    text-shadow: 0 2px 5px rgba(0,0,0,0.5);
+    margin-bottom: 20px;
 }
 
 /* حاوية الأزرار */
 #buttons {
     display: flex;
-    flex-wrap: wrap;
     justify-content: center;
-    gap: 15px;
+    gap: 20px;
+    flex-wrap: wrap;
     margin-top: 30px;
 }
 
-/* أزرار الإجابة */
+/* الأزرار (مربعات ملونة) */
 .btn {
-    padding: 15px 25px;
-    font-size: 22px;
+    width: 80px;
+    height: 80px;
+    border: 4px solid white; /* إطار أبيض لتمييز الزر */
+    border-radius: 15px;
     cursor: pointer;
-    border: none;
-    border-radius: 12px;
-    background-color: #333;
-    color: white;
-    font-family: "Tajawal", sans-serif;
-    transition: transform 0.1s, background-color 0.2s;
-    min-width: 100px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    transition: transform 0.1s;
 }
 
 .btn:hover {
-    background-color: #555;
-    transform: scale(1.05);
+    transform: scale(1.1);
 }
 
 .btn:active {
-    transform: scale(0.95);
+    transform: scale(0.90);
 }
 
-/* عداد الأسئلة */
-#counter {
+/* تحسينات عامة */
+input {
+    padding: 12px;
     font-size: 18px;
-    color: #777;
-    margin-bottom: 10px;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    text-align: center;
+    width: 70%;
+    font-family: "Tajawal";
+    margin-top: 10px;
 }
 
-/* تنسيق صندوق النتيجة */
-.result-box p {
+#start-btn, .retry-btn {
+    padding: 12px 30px;
     font-size: 20px;
-    margin: 10px 0;
-    padding: 10px;
-    background: #f9f9f9;
+    background: #007aff;
+    color: white;
+    border: none;
     border-radius: 8px;
+    cursor: pointer;
+    font-family: "Tajawal";
+    margin-top: 20px;
+}
+
+.instructions {
+    text-align: right;
+    margin-top: 30px;
+    background: #f9f9f9;
+    padding: 15px;
+    border-radius: 10px;
+    font-size: 14px;
 }
