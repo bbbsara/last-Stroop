@@ -3,7 +3,7 @@ const SUPABASE_URL = "https://zqnqordfetvbzzggmmao.supabase.co";
 const SUPABASE_KEY =
 "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InpxbnFvcmRmZXR2Ynp6Z2dtbWFvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjQ3NTIxNDYsImV4cCI6MjA4MDMyODE0Nn0.A3JSRO7MpxVkMflORIg-KCN-a8Hu522ezCZ1sm3ev4g";
 
-const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+const supabase = supabasejs.createClient(SUPABASE_URL, SUPABASE_KEY);
 
 // كلمات الاختبار
 const words = ["أحمر", "أزرق", "أخضر", "أصفر", "برتقالي"];
@@ -14,6 +14,7 @@ const colorsHex = {
     "أصفر": "#ffeb3b",
     "برتقالي": "#ff9500"
 };
+
 const TOTAL = 40;
 
 let current = 0, correct = 0, wrong = 0;
@@ -34,8 +35,14 @@ document.getElementById("start-btn").onclick = () => {
 
     startScreen.style.display = "none";
     testContainer.style.display = "block";
+
     newTrial();
 };
+
+// اختيار عشوائي
+function pickRandom(arr) {
+    return arr[Math.floor(Math.random() * arr.length)];
+}
 
 // جولة جديدة
 function newTrial() {
@@ -45,7 +52,9 @@ function newTrial() {
     counterEl.textContent = `${current} / ${TOTAL}`;
 
     let word = pickRandom(words);
-    let ink = pickRandom(words.filter(w => w !== word));
+    let ink = pickRandom(words);
+
+    while (ink === word) ink = pickRandom(words);
 
     wordEl.textContent = word;
     wordEl.style.color = colorsHex[ink];
@@ -57,7 +66,7 @@ function newTrial() {
     trialStart = performance.now();
 }
 
-// زر الإجابة
+// الضغط على الأزرار
 document.querySelectorAll(".btn").forEach(btn => {
     btn.onclick = () => {
         let answer = btn.dataset.color;
@@ -80,33 +89,27 @@ async function finishTest() {
 
     const totalTime = trialData.reduce((a, b) => a + b.rt, 0);
     const avgTime = Math.round(totalTime / trialData.length);
+    const stroopEffect = avgTime;
 
-    // حساب تأثير ستروب
-    const congruent = trialData.filter(t => t.word === t.ink).map(t => t.rt);
-    const incongruent = trialData.filter(t => t.word !== t.ink).map(t => t.rt);
+    document.getElementById("result-name").textContent = "الاسم: " + studentName;
+    document.getElementById("result-correct").textContent = "الإجابات الصحيحة: " + correct;
+    document.getElementById("result-wrong").textContent = "الأخطاء: " + wrong;
+    document.getElementById("result-time").textContent = "الزمن الكلي: " + totalTime + " مللي ثانية";
+    document.getElementById("result-avg").textContent = "المتوسط: " + avgTime + " مللي ثانية";
 
-    const avgCongruent = congruent.length > 0
-        ? congruent.reduce((a, b) => a + b, 0) / congruent.length
-        : 0;
+    const { error } = await supabase
+        .from("stroop_results")
+        .insert([{
+            student_name: studentName,
+            correct: correct,
+            wrong: wrong,
+            total_time_ms: totalTime,
+            avg_time_ms: avgTime,
+            stroop_effect: stroopEffect
+        }]);
 
-    const avgIncongruent = incongruent.length > 0
-        ? incongruent.reduce((a, b) => a + b, 0) / incongruent.length
-        : 0;
-
-    const stroopEffect = avgIncongruent - avgCongruent;
-
-    // إرسال النتيجة إلى Supabase
-    await supabase.from("stroop_results").insert([{
-        student_name: studentName,
-        correct: correct,
-        wrong: wrong,
-        total_time_ms: totalTime,
-        avg_time_ms: avgTime,
-        stroop_effect: stroopEffect
-    }]);
-}
-
-// اختيار عشوائي
-function pickRandom(arr) {
-    return arr[Math.floor(Math.random() * arr.length)];
+    if (error) {
+        console.error(error);
+        alert("فشل إدخال البيانات إلى Supabase");
+    }
 }
