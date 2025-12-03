@@ -2,28 +2,35 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>اختبار ستروب</title>
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-    <!-- شاشة البدء -->
     <div id="start-screen">
         <h1>اختبار ستروب</h1>
         <p>أدخل اسم الطالب ثم اضغط بدء</p>
 
         <input type="text" id="student-name" placeholder="اسم الطالب">
+        <br>
         <button id="start-btn">ابدأ الاختبار</button>
 
         <hr>
 
-        <h3>مثال توضيحي:</h3>
-        <p>ستظهر كلمة بلون مختلف. المطلوب اختيار <strong>لون الكلمة</strong> وليس معناها.</p>
-        <p>مثال: كلمة "أخضر" مكتوبة باللون الأحمر → الإجابة الصحيحة هي: <strong>أحمر</strong>.</p>
+        <div style="text-align: right; margin-top: 20px;">
+            <h3>طريقة الاختبار:</h3>
+            <p>ستظهر لك كلمات ملونة.</p>
+            <p>المطلوب منك اختيار <strong>لون الحبر</strong> الذي كُتبت به الكلمة، وتجاهل معنى الكلمة نفسها.</p>
+            <p style="background: #eee; padding: 10px; border-radius: 5px;">
+                مثال: إذا ظهرت كلمة "أخضر" مكتوبة باللون <span style="color:red; font-weight:bold;">الأحمر</span> 
+                <br>
+                عليك الضغط على زر: <strong>أحمر</strong>
+            </p>
+        </div>
     </div>
 
-    <!-- شاشة الاختبار -->
     <div id="test-container" style="display:none;">
         <div id="counter">1 / 40</div>
         <div id="word">---</div>
@@ -37,25 +44,21 @@
         </div>
     </div>
 
-    <!-- شاشة النتيجة -->
     <div id="end-screen" style="display:none;">
         <h2>نتيجة الاختبار</h2>
-        <p id="result-name"></p>
-        <p id="result-correct"></p>
-        <p id="result-wrong"></p>
-        <p id="result-time"></p>
-        <p id="result-avg"></p>
+        <div class="result-box">
+            <p id="result-name"></p>
+            <p id="result-correct" style="color: green;"></p>
+            <p id="result-wrong" style="color: red;"></p>
+            <p id="result-time"></p>
+            <p id="result-avg"></p>
+        </div>
 
-        <button onclick="location.reload()">إعادة الاختبار</button>
+        <button onclick="location.reload()" style="margin-top: 20px; background: #555;">إعادة الاختبار</button>
     </div>
 
-    <!-- Supabase -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <script>
-        const supabasejs = supabase;
-    </script>
-
-    <!-- السكربت الرئيسي -->
+    
     <script src="script.js"></script>
 
 </body>
