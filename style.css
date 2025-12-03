@@ -1,27 +1,116 @@
 body {
+    margin: 0;
+    padding: 0;
+    background: #ffd54f;
     font-family: "Tajawal", sans-serif;
-    background: #27ae60;
     text-align: center;
-    direction: rtl;
+    transition: background 0.2s ease-in-out;
 }
 
-#main {
-    margin-top: 60px;
+/* شاشة البداية */
+#start-screen {
+    padding: 40px;
 }
 
-#word {
-    font-size: 60px;
-    font-weight: bold;
-    margin: 30px 0;
+#start-screen h1 {
+    font-size: 40px;
+}
+
+#start-screen .desc {
+    font-size: 20px;
+    margin: 20px 0;
+    line-height: 1.8;
+}
+
+#example {
+    background: #fff;
+    padding: 15px;
+    border-radius: 10px;
+    width: 85%;
+    margin: 10px auto 25px;
+    font-size: 18px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+input {
+    width: 80%;
+    padding: 12px;
+    font-size: 20px;
+    margin-bottom: 20px;
 }
 
 button {
     padding: 12px 25px;
-    margin: 10px;
-    border: none;
-    background: #34495e;
+    font-size: 22px;
+    background: #333;
     color: white;
-    font-size: 20px;
+    border: none;
+    border-radius: 10px;
     cursor: pointer;
-    border-radius: 8px;
+}
+
+button:hover {
+    background: #555;
+}
+
+/* شاشة الاختبار */
+#test-container {
+    margin-top: 30px;
+}
+
+#card {
+    background: white;
+    width: 340px;
+    margin: 0 auto;
+    padding: 40px;
+    border-radius: 25px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+}
+
+#word {
+    font-size: 70px;
+    font-weight: bold;
+}
+
+#info-bar {
+    margin-top: 25px;
+    font-size: 26px;
+    display: flex;
+    justify-content: space-around;
+}
+
+#color-buttons {
+    margin-top: 60px;
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+}
+
+.btn {
+    width: 70px;
+    height: 70px;
+    border-radius: 18px;
+    border: 3px solid white;
+    cursor: pointer;
+}
+
+/* ألوان الأزرار */
+.btn[data-color="أحمر"] { background: #ff3b30; }
+.btn[data-color="أزرق"] { background: #007aff; }
+.btn[data-color="أخضر"] { background: #4cd964; }
+.btn[data-color="أصفر"] { background: #ffeb3b; }
+.btn[data-color="برتقالي"] { background: #ff9500; }
+
+/* شاشة النهاية */
+#end-screen {
+    padding: 40px;
+}
+
+#end-screen h2 {
+    font-size: 38px;
+}
+
+#end-screen p {
+    font-size: 22px;
+    margin: 10px;
 }
