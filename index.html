@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>اختبار ستروب</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<div id="main">
+    <h1>اختبار ستروب</h1>
+
+    <div id="info">
+        <label>اسم الطالب:</label>
+        <input type="text" id="studentName" placeholder="أدخل الاسم">
+        <button id="startBtn">ابدأ</button>
+    </div>
+
+    <div id="test" style="display:none;">
+        <div id="word"></div>
+        <div id="buttons"></div>
+        <p id="timer"></p>
+    </div>
+
+    <div id="result" style="display:none;">
+        <h2>نتيجة الاختبار</h2>
+        <p id="resName"></p>
+        <p id="resCorrect"></p>
+        <p id="resWrong"></p>
+        <p id="resTotalTime"></p>
+        <p id="resAvg"></p>
+        <p id="sendStatus"></p>
+        <button onclick="location.reload()">إعادة الاختبار</button>
+    </div>
+
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
