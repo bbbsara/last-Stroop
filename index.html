@@ -2,72 +2,61 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>اختبار ستروب</title>
     <link rel="stylesheet" href="style.css">
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 
 <body>
 
-<div id="start-screen">
-    <h1>اختبار ستروب</h1>
+    <!-- شاشة البدء -->
+    <div id="start-screen">
+        <h1>اختبار ستروب</h1>
+        <p>أدخل اسم الطالب ثم اضغط بدء</p>
 
-    <p class="desc">
-        هذا الاختبار يقيس سرعة الانتباه والتركيز.  
-        سيظهر أمامك اسم لون (مثل "أحمر" أو "أزرق") ولكن بلون مختلف.  
-        مهمتك هي اختيار <b>اللون الحقيقي للنص</b> وليس قراءة الكلمة.  
-        لديك 40 محاولة. حاول الإجابة بأسرع وقت ممكن.
-    </p>
+        <input type="text" id="student-name" placeholder="اسم الطالب">
+        <button id="start-btn">ابدأ الاختبار</button>
 
-    <div id="example">
-        <h3>مثال:</h3>
-        <p>
-            تظهر كلمة <span class="ex-word">"أحمر"</span> مكتوبة باللون  
-            <span class="ex-color" style="color:blue;">الأزرق</span>  
-            → الإجابة الصحيحة هي: <b>أزرق</b>.
-        </p>
+        <hr>
+
+        <h3>مثال توضيحي:</h3>
+        <p>ستظهر كلمة بلون مختلف. المطلوب اختيار <strong>لون الكلمة</strong> وليس معناها.</p>
+        <p>مثال: كلمة "أخضر" مكتوبة باللون الأحمر → الإجابة الصحيحة هي: <strong>أحمر</strong>.</p>
     </div>
 
-    <label>اسم الطالب:</label>
-    <input id="student-name" type="text" placeholder="اكتب اسمك هنا">
+    <!-- شاشة الاختبار -->
+    <div id="test-container" style="display:none;">
+        <div id="counter">1 / 40</div>
+        <div id="word">---</div>
 
-    <button id="start-btn">ابدأ الاختبار</button>
-</div>
-
-<!-- شاشة الاختبار -->
-<div id="test-container" style="display:none;">
-    <div id="card">
-        <span id="word"></span>
+        <div id="buttons">
+            <button class="btn" data-color="أحمر">أحمر</button>
+            <button class="btn" data-color="أزرق">أزرق</button>
+            <button class="btn" data-color="أخضر">أخضر</button>
+            <button class="btn" data-color="أصفر">أصفر</button>
+            <button class="btn" data-color="برتقالي">برتقالي</button>
+        </div>
     </div>
 
-    <div id="info-bar">
-        <span id="counter">1 / 40</span>
-        <span id="timer">0.00 ثانية</span>
+    <!-- شاشة النتيجة -->
+    <div id="end-screen" style="display:none;">
+        <h2>نتيجة الاختبار</h2>
+        <p id="result-name"></p>
+        <p id="result-correct"></p>
+        <p id="result-wrong"></p>
+        <p id="result-time"></p>
+        <p id="result-avg"></p>
+
+        <button onclick="location.reload()">إعادة الاختبار</button>
     </div>
 
-    <div id="color-buttons">
-        <button class="btn" data-color="أحمر"></button>
-        <button class="btn" data-color="أزرق"></button>
-        <button class="btn" data-color="أخضر"></button>
-        <button class="btn" data-color="أصفر"></button>
-        <button class="btn" data-color="برتقالي"></button>
-    </div>
-</div>
+    <!-- Supabase -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script>
+        const supabasejs = supabase;
+    </script>
 
-<!-- شاشة النتائج -->
-<div id="end-screen" style="display:none;">
-    <h2>نتيجة الاختبار</h2>
+    <!-- السكربت الرئيسي -->
+    <script src="script.js"></script>
 
-    <p id="result-name"></p>
-    <p id="result-correct"></p>
-    <p id="result-wrong"></p>
-    <p id="result-time"></p>
-    <p id="result-avg"></p>
-
-    <button onclick="location.reload()">إعادة الاختبار</button>
-</div>
-
-<script src="script.js"></script>
 </body>
 </html>
