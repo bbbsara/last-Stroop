@@ -1,0 +1,27 @@
+body {
+    font-family: "Tajawal", sans-serif;
+    background: #27ae60;
+    text-align: center;
+    direction: rtl;
+}
+
+#main {
+    margin-top: 60px;
+}
+
+#word {
+    font-size: 60px;
+    font-weight: bold;
+    margin: 30px 0;
+}
+
+button {
+    padding: 12px 25px;
+    margin: 10px;
+    border: none;
+    background: #34495e;
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+    border-radius: 8px;
+}
