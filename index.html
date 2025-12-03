@@ -11,41 +11,37 @@
 
     <div id="start-screen">
         <h1>اختبار ستروب</h1>
-        <p>أدخل اسم الطالب ثم اضغط بدء</p>
-
-        <input type="text" id="student-name" placeholder="اسم الطالب">
+        <p>الرجاء إدخال اسم الطالب:</p>
+        <input type="text" id="student-name" placeholder="اسم الطالب الثلاثي">
         <br>
         <button id="start-btn">ابدأ الاختبار</button>
-
-        <hr>
-
-        <div style="text-align: right; margin-top: 20px;">
+        
+        <div class="instructions">
             <h3>طريقة الاختبار:</h3>
-            <p>ستظهر لك كلمات ملونة.</p>
-            <p>المطلوب منك اختيار <strong>لون الحبر</strong> الذي كُتبت به الكلمة، وتجاهل معنى الكلمة نفسها.</p>
-            <p style="background: #eee; padding: 10px; border-radius: 5px;">
-                مثال: إذا ظهرت كلمة "أخضر" مكتوبة باللون <span style="color:red; font-weight:bold;">الأحمر</span> 
-                <br>
-                عليك الضغط على زر: <strong>أحمر</strong>
-            </p>
+            <p>1. ستتغير <strong>لون خلفية الشاشة</strong> بالكامل.</p>
+            <p>2. سيظهر مربع أبيض في الوسط يحتوي على كلمة مشتتة.</p>
+            <p>3. مهمتك: اضغط على المربع الملون الذي يطابق <strong>لون خلفية الشاشة</strong>.</p>
         </div>
     </div>
 
     <div id="test-container" style="display:none;">
         <div id="counter">1 / 40</div>
-        <div id="word">---</div>
+
+        <div id="word-box">
+            <div id="word">---</div>
+        </div>
 
         <div id="buttons">
-            <button class="btn" data-color="أحمر">أحمر</button>
-            <button class="btn" data-color="أزرق">أزرق</button>
-            <button class="btn" data-color="أخضر">أخضر</button>
-            <button class="btn" data-color="أصفر">أصفر</button>
-            <button class="btn" data-color="برتقالي">برتقالي</button>
+            <button class="btn" data-color="أحمر" style="background-color: #ff3b30;"></button>
+            <button class="btn" data-color="أزرق" style="background-color: #007aff;"></button>
+            <button class="btn" data-color="أخضر" style="background-color: #4cd964;"></button>
+            <button class="btn" data-color="أصفر" style="background-color: #ffeb3b;"></button>
+            <button class="btn" data-color="برتقالي" style="background-color: #ff9500;"></button>
         </div>
     </div>
 
     <div id="end-screen" style="display:none;">
-        <h2>نتيجة الاختبار</h2>
+        <h2>انتهى الاختبار</h2>
         <div class="result-box">
             <p id="result-name"></p>
             <p id="result-correct" style="color: green;"></p>
@@ -53,12 +49,10 @@
             <p id="result-time"></p>
             <p id="result-avg"></p>
         </div>
-
-        <button onclick="location.reload()" style="margin-top: 20px; background: #555;">إعادة الاختبار</button>
+        <button onclick="location.reload()" class="retry-btn">إجراء اختبار جديد</button>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    
     <script src="script.js"></script>
 
 </body>
