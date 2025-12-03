@@ -1,41 +1,48 @@
 <!DOCTYPE html>
-<html lang="ar">
+<html lang="ar" dir="rtl">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>اختبار ستروب</title>
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="style.css">
+
+    <!-- مكتبة Supabase يجب أن تكون قبل script.js -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
+
 <body>
 
-<div id="main">
-    <h1>اختبار ستروب</h1>
+    <div class="container">
+        <h1>اختبار ستروب</h1>
+        <p>أدخل اسم الطالب ثم اضغط ابدأ:</p>
 
-    <div id="info">
-        <label>اسم الطالب:</label>
-        <input type="text" id="studentName" placeholder="أدخل الاسم">
-        <button id="startBtn">ابدأ</button>
+        <input type="text" id="studentName" placeholder="اكتب اسمك هنا">
+
+        <button id="startBtn">ابدأ الاختبار</button>
+
+        <div id="testArea" style="display:none;">
+            <h2 id="word">كلمة</h2>
+
+            <div class="btns">
+                <button class="color-btn" data-color="red">أحمر</button>
+                <button class="color-btn" data-color="yellow">أصفر</button>
+                <button class="color-btn" data-color="green">أخضر</button>
+                <button class="color-btn" data-color="blue">أزرق</button>
+                <button class="color-btn" data-color="black">أسود</button>
+            </div>
+        </div>
+
+        <div id="resultArea" style="display:none;">
+            <h2>نتيجة الاختبار</h2>
+            <p id="rName"></p>
+            <p id="rCorrect"></p>
+            <p id="rWrong"></p>
+            <p id="rTotalTime"></p>
+            <p id="rAvgTime"></p>
+            <button onclick="location.reload()">إعادة الاختبار</button>
+        </div>
     </div>
 
-    <div id="test" style="display:none;">
-        <div id="word"></div>
-        <div id="buttons"></div>
-        <p id="timer"></p>
-    </div>
-
-    <div id="result" style="display:none;">
-        <h2>نتيجة الاختبار</h2>
-        <p id="resName"></p>
-        <p id="resCorrect"></p>
-        <p id="resWrong"></p>
-        <p id="resTotalTime"></p>
-        <p id="resAvg"></p>
-        <p id="sendStatus"></p>
-        <button onclick="location.reload()">إعادة الاختبار</button>
-    </div>
-
-</div>
-
-<script src="script.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
