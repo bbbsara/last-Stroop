@@ -12,7 +12,7 @@ const colorsHex = {
     "أزرق": "#007aff",
     "أخضر": "#4cd964",
     "أصفر": "#ffeb3b",
-    "برتقاني": "#ff9500"
+    "برتقالي": "#ff9500"
 };
 const TOTAL = 40;
 
@@ -26,7 +26,6 @@ const testContainer = document.getElementById("test-container");
 const endScreen = document.getElementById("end-screen");
 const wordEl = document.getElementById("word");
 const counterEl = document.getElementById("counter");
-const timerEl = document.getElementById("timer");
 
 // بدء الاختبار
 document.getElementById("start-btn").onclick = () => {
@@ -58,7 +57,7 @@ function newTrial() {
     trialStart = performance.now();
 }
 
-// الضغط على زر
+// زر الإجابة
 document.querySelectorAll(".btn").forEach(btn => {
     btn.onclick = () => {
         let answer = btn.dataset.color;
@@ -82,19 +81,28 @@ async function finishTest() {
     const totalTime = trialData.reduce((a, b) => a + b.rt, 0);
     const avgTime = Math.round(totalTime / trialData.length);
 
-    document.getElementById("result-name").textContent = "الاسم: " + studentName;
-    document.getElementById("result-correct").textContent = "الإجابات الصحيحة: " + correct;
-    document.getElementById("result-wrong").textContent = "الأخطاء: " + wrong;
-    document.getElementById("result-time").textContent = "الزمن الكلي: " + totalTime + " مللي ثانية";
-    document.getElementById("result-avg").textContent = "المتوسط: " + avgTime + " مللي ثانية";
+    // حساب تأثير ستروب
+    const congruent = trialData.filter(t => t.word === t.ink).map(t => t.rt);
+    const incongruent = trialData.filter(t => t.word !== t.ink).map(t => t.rt);
 
-    // إرسال الى Supabase
+    const avgCongruent = congruent.length > 0
+        ? congruent.reduce((a, b) => a + b, 0) / congruent.length
+        : 0;
+
+    const avgIncongruent = incongruent.length > 0
+        ? incongruent.reduce((a, b) => a + b, 0) / incongruent.length
+        : 0;
+
+    const stroopEffect = avgIncongruent - avgCongruent;
+
+    // إرسال النتيجة إلى Supabase
     await supabase.from("stroop_results").insert([{
-        student: studentName,
+        student_name: studentName,
         correct: correct,
         wrong: wrong,
-        total_time: totalTime,
-        avg_time: avgTime
+        total_time_ms: totalTime,
+        avg_time_ms: avgTime,
+        stroop_effect: stroopEffect
     }]);
 }
 
